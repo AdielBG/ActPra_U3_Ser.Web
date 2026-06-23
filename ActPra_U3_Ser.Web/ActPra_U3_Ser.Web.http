@@ -1,0 +1,6 @@
+@ActPra_U3_Ser.Web_HostAddress = http://localhost:5084
+
+GET {{ActPra_U3_Ser.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
