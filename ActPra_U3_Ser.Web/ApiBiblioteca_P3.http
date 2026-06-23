@@ -1,0 +1,6 @@
+@ApiBiblioteca_P3_HostAddress = http://localhost:5084
+
+GET {{ApiBiblioteca_P3_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
