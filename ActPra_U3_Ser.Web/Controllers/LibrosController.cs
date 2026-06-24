@@ -93,5 +93,23 @@ namespace ApiBiblioteca_P3.Controllers
             return NoContent();
         }
 
+        // -------------------------------------------------------
+        // ENDPOINT 5: Eliminar un libro
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Eliminar(int id)
+        {
+            var libro = await _context.Libros.FindAsync(id);
+
+            if (libro == null)
+            {
+                return NotFound("No se encontró un libro con el Id " + id);
+            }
+
+            _context.Libros.Remove(libro);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
     }
 }
