@@ -66,5 +66,32 @@ namespace ApiBiblioteca_P3.Controllers
             return CreatedAtAction(nameof(ObtenerPorId), new { id = libro.Id }, libro);
         }
 
+
+        // -------------------------------------------------------
+        // ENDPOINT 4: Actualizar un libro completo
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Actualizar(int id, [FromBody] Libro libroActualizado)
+        {
+            var libro = await _context.Libros.FindAsync(id);
+
+            if (libro == null)
+            {
+                return NotFound("No se encontró un libro con el Id " + id);
+            }
+
+            // Reemplazar todos los campos
+            libro.Titulo = libroActualizado.Titulo;
+            libro.Autor = libroActualizado.Autor;
+            libro.AnioPublicacion = libroActualizado.AnioPublicacion;
+            libro.Genero = libroActualizado.Genero;
+            libro.NumeroPaginas = libroActualizado.NumeroPaginas;
+            libro.Precio = libroActualizado.Precio;
+            libro.Disponible = libroActualizado.Disponible;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
     }
 }
