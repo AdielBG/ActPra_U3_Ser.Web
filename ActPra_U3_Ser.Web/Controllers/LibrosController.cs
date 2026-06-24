@@ -33,5 +33,20 @@ namespace ApiBiblioteca_P3.Controllers
         }
 
 
+        // -------------------------------------------------------
+        // ENDPOINT 2: Obtener un libro por Id
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> ObtenerPorId(int id)
+        {
+            var libro = await _context.Libros.FindAsync(id);
+
+            if (libro == null)
+            {
+                return NotFound("No se encontró un libro con el Id " + id);
+            }
+
+            return Ok(libro);
+        }
+
     }
 }
