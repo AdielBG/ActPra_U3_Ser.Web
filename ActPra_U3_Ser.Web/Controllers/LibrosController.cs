@@ -48,5 +48,23 @@ namespace ApiBiblioteca_P3.Controllers
             return Ok(libro);
         }
 
+        // -------------------------------------------------------
+        // ENDPOINT 3: Crear un nuevo libro
+        [HttpPost]
+        public async Task<IActionResult> Crear([FromBody] Libro libro)
+        {
+            if (libro == null)
+            {
+                return BadRequest("Los datos del libro no son válidos.");
+            }
+
+            _context.Libros.Add(libro);
+            await _context.SaveChangesAsync();
+
+            // Retorna una respuesta 201 (Created) indicando que el recurso fue creado.
+            // Además, incluye la ubicación del nuevo recurso mediante el método ObtenerPorId.
+            return CreatedAtAction(nameof(ObtenerPorId), new { id = libro.Id }, libro);
+        }
+
     }
 }
